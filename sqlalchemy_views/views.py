@@ -30,9 +30,8 @@ class CreateView(_CreateDropBase):
 
     __visit_name__ = "create_view"
 
-    def __init__(self, element, selectable, on=None, bind=None,
-                 or_replace=False, options=None):
-        super(CreateView, self).__init__(element, on=on, bind=bind)
+    def __init__(self, element, selectable, or_replace=False, options=None, **kw):
+        super(CreateView, self).__init__(element, **kw)
         self.columns = [CreateColumn(column) for column in element.columns]
         self.selectable = selectable
         self.or_replace = or_replace
@@ -81,9 +80,8 @@ class DropView(_CreateDropBase):
 
     __visit_name__ = "drop_view"
 
-    def __init__(self, element, on=None, bind=None,
-                 cascade=False, if_exists=False):
-        super(DropView, self).__init__(element, on=on, bind=bind)
+    def __init__(self, element, cascade=False, if_exists=False, **kw):
+        super(DropView, self).__init__(element, **kw)
         self.cascade = cascade
         self.if_exists = if_exists
 
